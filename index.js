@@ -29,7 +29,11 @@ class User {
             delete this.meds[time]
     }
     reminderList(){
-        return Object.keys(this.meds).join(', ')
+        const lst = Object.keys(this.meds).join(', ')
+        if(lst.length < 5){
+            return 'You have no reminders set.'
+        }
+        return lst
     }
 }
 
