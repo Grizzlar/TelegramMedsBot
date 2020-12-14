@@ -1,0 +1,23 @@
+{
+  "name": "telegrammedsbot",
+  "version": "1.0.0",
+  "description": "TelegramMedsBot",
+  "main": "index.js",
+  "dependencies": {
+    "telegraf": "^3.38.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grizzlar/TelegramMedsBot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Grizzlar/TelegramMedsBot/issues"
+  },
+  "homepage": "https://github.com/Grizzlar/TelegramMedsBot#readme"
+}
