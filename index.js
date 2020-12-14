@@ -24,6 +24,13 @@ class User {
         if(this.meds.hasOwnProperty(time))
             this.meds[time] = new Date().getTime()
     }
+    forgetReminder(time){
+        if(this.meds.hasOwnProperty(time))
+            delete this.meds[time]
+    }
+    reminderList(){
+        return Object.keys(this.meds).join(', ')
+    }
 }
 
 function alertUsers(){
@@ -124,6 +131,24 @@ bot.command('/remind', ctx => {
             users[ctx.message.from.id].addReminder(ctx.args[0])
             ctx.reply('OK!')
         })
+})
+
+bot.command('forget', ctx => {
+    if(ctx.args.length !== 1)
+        ctx.reply('Usage: /forget <time>\nExample: /forget 14:04')
+    else if(!isTime(ctx.args[0]))
+        ctx.reply('Incorrect time format.\nTime format is hour:minute (military)')
+    else
+        registered(ctx.message.from.id, () => {
+            users[ctx.message.from.id].forgetReminder(ctx.args[0])
+            ctx.reply('OK!')
+        })
+})
+
+bot.command('list', ctx => {
+    registered(ctx.message.from.id, () => {
+        ctx.reply(users[ctx.message.from.id].reminderList())
+    })
 })
 
 bot.command('took', ctx => {
