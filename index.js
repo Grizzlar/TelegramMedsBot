@@ -46,8 +46,10 @@ function alertUsers(){
         const diff = Math.sign(u.timezone)*Math.floor(Math.abs(u.timezone*60))
         let nmin = (min+diff) % 60
         if(nmin < 0)
-            nmin = 60-nmin
-        let nhour = (Math.sign(u.timezone)*Math.ceil(Math.abs((min+diff)/60))+hour) % 24
+            nmin = 60+nmin
+        let nhour = (Math.floor(diff/60)+hour+((diff%60+min) >= 60 ? 1 : 0)+((diff%60+min) < 0 ? -1 : 0)) % 24
+        if(nhour < 0)
+            nhour = 24+nhour
         nmin = '0'.repeat(2-nmin.toString().length)+nmin
         nhour = '0'.repeat(2-nhour.toString().length)+nhour
         Object.keys(u.meds).forEach(med => {
@@ -59,7 +61,7 @@ function alertUsers(){
             }else{
                 mins = med.split(':')[1]
                 if(mins == nmin && (now.getTime() - u.meds[med]) >= 3600000)
-                    bot.telegram.sendMessage(user, 'Please take your meds!\n\nSay /took '+med+' or I\'ll keep reminding you about it every hour.')
+                    bot.telegram.sendMessage(user, 'Please take your meds!\n\nSay /took '+med+' so that I know you took them.\nIf you don\'t, I\'ll keep reminding you about it every hour.')
             }
         })
     });
