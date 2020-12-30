@@ -60,7 +60,7 @@ function alertUsers(){
                 }
             }else{
                 mins = med.split(':')[1]
-                if(mins == nmin && (now.getTime() - u.meds[med]) >= 3600000)
+                if(mins == nmin && (now.getTime() - u.meds[med]) >= 86000000)
                     bot.telegram.sendMessage(user, 'Please take your meds!\n\nSay /took '+med+' so that I know you took them.\nIf you don\'t, I\'ll keep reminding you about it every hour.')
             }
         })
